@@ -19,10 +19,10 @@ docker build -t centos-syncrepo:rocky -f Rocky/Dockerfile .
 * Queens
 ```
 mkdir queens-pkgs
-docker run -d -v $PWD/queens-pkgs:/root/queens-pkgs centos-syncrepo:queens reposync -l -n -p /root/queens-pkgs --name queens-syncrepo
+docker run  --name queens-syncrepo -d -v $PWD/queens-pkgs:/root/queens-pkgs centos-syncrepo:queens reposync -l -n -p /root/queens-pkgs
 ```
 * Rocky
 ```
 mkdir rocky-pkgs
-docker run -d -v $PWD/rocky-pkgs:/root/rocky-pkgs centos-syncrepo:rocky reposync -l -n -p /root/rocky-pkgs --name rocky-syncrepo
+docker run --name rocky-syncrepo -d -v $PWD/rocky-pkgs:/root/rocky-pkgs centos-syncrepo:rocky reposync -l -n -p /root/rocky-pkgs
 ```
