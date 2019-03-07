@@ -1,0 +1,6 @@
+
+[tripleo-centos-ceph-luminous]
+name=tripleo-centos-ceph-luminous
+baseurl=http://mirror.centos.org/centos/7/storage/x86_64/ceph-luminous/
+gpgcheck=0
+enabled=1
