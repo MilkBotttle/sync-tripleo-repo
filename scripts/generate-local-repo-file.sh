@@ -3,7 +3,7 @@
 execute_user=$(whoami)
 
 if [ "$execute_user" -ne "root" ];then
-    echo "You need root permission to run this script."
+    echo "You need root permission to run this script, use 'sudo' or root user."
     exit 1
 fi
 
@@ -40,14 +40,28 @@ rm -rf /etc/yum.repos.d/*
 echo "Create yum repo file."
 touch $REPOFILE
 for DIR in `find $REPODIR -maxdepth 1 -mindepth 1 -type d`; do
+    # Create in /etc/yum.repos.d
     echo -e "[`basename $DIR`]" >> $REPOFILE
     echo -e "name=`basename $DIR`" >> $REPOFILE
     echo -e "baseurl=file://$REPODIR/" >> $REPOFILE
     echo -e "enabled=1" >> $REPOFILE
     echo -e "gpgcheck=0" >> $REPOFILE
     echo -e "\n" >> $REPOFILE
+    # Create in $PWD
+    echo -e "[`basename $DIR`]" >> $PWD$REPOFILE_NAME
+    echo -e "name=`basename $DIR`" >> $PWD$REPOFILE_NAME
+    echo -e "baseurl=file://$REPODIR/" >> $PWD$REPOFILE_NAME
+    echo -e "enabled=1" >> $PWD$REPOFILE_NAME
+    echo -e "gpgcheck=0" >> $PWD$REPOFILE_NAME
+    echo -e "\n" >> $PWD$REPOFILE_NAME
 done;
 
 #test
 yum clean all
 yum repolist 
+
+echo
+echo "Create repo file complete"
+echo "Create at:"
+echo "$REPOFILE"
+echo "$PWD$REPOFILE_NAME"
