@@ -9,7 +9,7 @@ fi
 
 if [[ "x$1" == "x" || $1 == "help" ]];
 then
-    echo "Usage: local-repo REPODIR"
+    echo "Usage: generate-local-repo REPODIR"
     echo "help: print this message"
     echo "REPODIR: tripleo pkgs absolute path"
     echo
@@ -47,13 +47,6 @@ for DIR in `find $REPODIR -maxdepth 1 -mindepth 1 -type d`; do
     echo -e "enabled=1" >> $REPOFILE
     echo -e "gpgcheck=0" >> $REPOFILE
     echo -e "\n" >> $REPOFILE
-    # Create in $PWD
-    echo -e "[`basename $DIR`]" >> $PWD$REPOFILE_NAME
-    echo -e "name=`basename $DIR`" >> $PWD$REPOFILE_NAME
-    echo -e "baseurl=file://$REPODIR/" >> $PWD$REPOFILE_NAME
-    echo -e "enabled=1" >> $PWD$REPOFILE_NAME
-    echo -e "gpgcheck=0" >> $PWD$REPOFILE_NAME
-    echo -e "\n" >> $PWD$REPOFILE_NAME
 done;
 
 #test
