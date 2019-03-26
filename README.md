@@ -5,19 +5,23 @@
  Build base image first if it not exist.
 * Base
 ```
-docker build -t centos-syncrepo:base -f base/Dockerfile .
+cd base
+docker build --network host -t centos-syncrepo:base .
 ```
 * Pike
 ```
-docker build -t centos-syncrepo:pike -f Queens/Dockerfile .
+cd Pike
+docker build --network host -t centos-syncrepo:pike .
 ```
 * Queens
 ```
-docker build -t centos-syncrepo:queens -f Queens/Dockerfile .
+cd Queens
+docker build --network host -t centos-syncrepo:queens .
 ```
 * Rocky
 ```
-docker build -t centos-syncrepo:rocky -f Rocky/Dockerfile .
+cd Rocky
+docker build --network host -t centos-syncrepo:rocky .
 ```
 
 ## Syncrepo
@@ -25,17 +29,17 @@ Run container and sync pkgs from remote repo, the pkgs save in `$PWD/[version]-p
 * Pike
 ```
 mkdir pike-pkgs
-docker run  --name queens-syncrepo -d -v $PWD/pike-pkgs:/root/pike-pkgs centos-syncrepo:pike reposync -l -n -p /root/pike-pkgs
+docker run --network host --name queens-syncrepo -d -v $PWD/pike-pkgs:/root/pike-pkgs centos-syncrepo:pike reposync -l -n -p /root/pike-pkgs
 ```
 * Queens
 ```
 mkdir queens-pkgs
-docker run  --name queens-syncrepo -d -v $PWD/queens-pkgs:/root/queens-pkgs centos-syncrepo:queens reposync -l -n -p /root/queens-pkgs
+docker run --network host --name queens-syncrepo -d -v $PWD/queens-pkgs:/root/queens-pkgs centos-syncrepo:queens reposync -l -n -p /root/queens-pkgs
 ```
 * Rocky
 ```
 mkdir rocky-pkgs
-docker run --name rocky-syncrepo -d -v $PWD/rocky-pkgs:/root/rocky-pkgs centos-syncrepo:rocky reposync -l -n -p /root/rocky-pkgs
+docker run --network host --name rocky-syncrepo -d -v $PWD/rocky-pkgs:/root/rocky-pkgs centos-syncrepo:rocky reposync -l -n -p /root/rocky-pkgs
 ```
 ## Create repofile
 * local repo
