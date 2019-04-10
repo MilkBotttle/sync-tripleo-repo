@@ -18,7 +18,7 @@ fi
 
 REPODIR="$1" #/root/tripleo-pkgs
 WORKERS=`nproc --all`
-REPOFILE_NAME="uc-local-ooo.repo"
+REPOFILE_NAME="00-local-ooo.repo"
 REPOFILE="/etc/yum.repos.d/$REPOFILE_NAME"
 # `basename $REPODIR`.repo
 
@@ -34,7 +34,7 @@ createrepo -v --workers $WORKERS $REPODIR
 echo
 
 echo "Backup old repos"
-cp -r /etc/yum.repos.d /etc/yum.repos.d.old
+cp -r /etc/yum.repos.d /etc/yum.repos.d.backup
 rm -rf /etc/yum.repos.d/*
 
 echo "Create yum repo file."
@@ -57,4 +57,3 @@ echo
 echo "Create repo file complete"
 echo "Create at:"
 echo "$REPOFILE"
-echo "$PWD$REPOFILE_NAME"
