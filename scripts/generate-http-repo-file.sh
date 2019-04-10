@@ -11,7 +11,7 @@ fi
 
 REPODIR=$1
 ADDRESS=$2
-REPO_FILE_NAME="uc-ooo.repo"
+REPO_FILE_NAME="00-ooo.repo"
 WORKERS=`nproc --all`
 REPOFILE="/etc/yum.repos.d/$REPO_FILE_NAME"
 #`basename $REPODIR`"
@@ -29,7 +29,7 @@ createrepo -v --worker $WORKERS $REPODIR
 echo
 
 echo "Backup old file, and remove exist."
-cp /etc/yum.repos.d /etc/yum.repos.d.old
+cp /etc/yum.repos.d /etc/yum.repos.d.backup
 rm -rf /etc/yum.repos.d/*
 echo
 
