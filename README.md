@@ -1,6 +1,4 @@
 # Sync TripleO repos with container
-## Environment
-* docker version 18.09.3
 ## Build image
  Build base image first if it not exist.
 * Base
